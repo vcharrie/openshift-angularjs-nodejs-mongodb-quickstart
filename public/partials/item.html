@@ -1,11 +1,28 @@
  <div class="page-header">
    <h1>View List</h1>
  </div>
- <div class="well well-lg">
-   <strong>Title : {{tlist.title}}</strong><br>
+ <form role="form" ng-submit="updateTList()">
+ <div class="form-group well well-lg">
+   <strong>Title : <input type="text"  ng-model="tlist.title" class="form-control" id="tlistTitle" value="{{tlist.title}}"/></strong><br/>
  </div>
- <div ng-repeat="art in tlist.artefacts" class="radio">
-   <label><input type="checkbox" name="choice" value="{{art._id}}"> {{art.text}}
-   </label>
- </div>
- <p><a href="#/tlists" class="btn btn-default" role="button"><span class="glyphicon glyphicon-arrow-left"></span> Back to TripList List</a></p>
+  <div class="form-group">
+    <label>Artefacts</label>
+    <div class="row" ng-repeat="artefact in tlist.artefacts">
+      <input type="checkbox" name="choice" value="{{art._id}}" ng-model="art.selected" ng-true-value="YES" ng-false-value="NO"/> {{art.text}} 
+      <input type="text" ng-model="artefact.text" placeholder="Enter artefact {{$index+1}} text"><br>
+    </div>
+  </div>    
+  <div class="row">
+    <div class="col-xs-12">
+      <button type="button" class="btn btn-default" ng-click="addArtefact()"><span class="glyphicon glyphicon-plus"></span> Add another</button>
+    </div>
+  </div> 
+  <div class="row">
+    <div class="col-xs-2">
+      <a href="#/tlists" class="btn btn-default" role="button"><span class="glyphicon glyphicon-arrow-left"></span> Back to Trip Lists</a>
+    </div>
+    <div class="col-xs-2">
+      <button class="btn btn-primary pull-right" type="submit">Update List</button>
+    </div>
+  </div> 
+ </form>

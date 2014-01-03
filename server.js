@@ -37,9 +37,10 @@ if ('development' === app.get('env')) {
 app.get('/', routes.index);
 // app.get('/users', user.list);
 
-app.get('/tlists/tlists',  routes.tlists);
-app.get('/tlists/:tlistId',routes.atlist);
-app.post('/tlists',        routes.create);
+app.get('/tlists/tlists',   routes.tlists);
+app.get('/tlists/:tlistId', routes.atlist);
+app.post('/tlists',         routes.create);
+app.del('/tlists/:tlistId', routes.dellist);
 
 http.createServer(app).listen(app.get('port'), app.get('ipaddr'), function(){
   console.log('Express server listening on port ' + app.get('port'));

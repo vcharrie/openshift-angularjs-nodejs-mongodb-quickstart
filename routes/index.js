@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
 
-var dbUrl = process.env.OPENSHIFT_MONGODB_DB_URL + process.env.OPENSHIFT_APP_NAME;
+var dbHost = process.env.OPENSHIFT_MONGODB_DB_URL || "mongodb://localhost:27017/";
+var dbName = process.env.OPENSHIFT_APP_NAME       || "tripList";
+var dbUrl = "" + dbHost + dbName;
 
 var db = mongoose.createConnection(dbUrl, function(err) {
 		if (err) {
@@ -47,5 +49,24 @@ exports.create = function(req, res) {
     } else {
       res.json(doc);
     }   
+  });
+};
+
+//JSON API for getting a single poll
+exports.dellist = function(req, res) {  
+  var tlistId = req.params.tlistId;
+  return TListDB.findById(tlistId, '', function(err, tlist) {
+    if(tlist) {
+      return tlist.remove(function (err) {
+          if (!err) {
+              console.log("tlist " + tlistId + " removed");
+              return res.send('');
+            } else {
+              console.log(err);
+            }
+      });
+    } else {
+      res.json({error:true});
+    }
   });
 };

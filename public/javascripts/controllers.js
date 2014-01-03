@@ -3,8 +3,26 @@ function TListListCtrl($scope, TListDB) {
 	$scope.tlists = TListDB.query();
 }
 // Voting / viewing poll results
-function TListItemCtrl($scope, $routeParams, TListDB) {
+function TListItemCtrl($scope, $location, $routeParams, TListDB) {
+  console.log("TListItemCtrl...");
   $scope.tlist = TListDB.get({tlistId: $routeParams.tlistId});
+  $scope.addArtefact = function() {
+	    $scope.tlist.artefacts.push({ text: '' });
+  };  
+  $scope.updateTList = function() {
+	console.log("update tlist ...");
+  	var tlist = $scope.tlist;
+  	console.log("update tlist " + tlist.title);
+  	var newTList = new TListDB(tlist);       
+  	tlist.$delete({'tlistId':tlist._id});
+  	newTList.$save(function(p, resp) {
+  		if(!p.error) { 
+  			$location.path('tlists');
+  		} else {
+  			alert('Could not update trip list');
+  		}
+  	});
+  };  
 }
 // Creating a new poll
 function TListNewCtrl($scope, $location, TListDB) {
@@ -17,12 +35,13 @@ function TListNewCtrl($scope, $location, TListDB) {
   };
   $scope.createTList = function() {
       var tlist = $scope.tlist;
+	  console.log("create tlist " + tlist.title); 
       if(tlist.title.length > 0) {
         var artefactCount = 0;
         for(var i = 0, ln = tlist.artefacts.length; i < ln; i++) {
           var art = tlist.artefacts[i];        
           if(art.text.length > 0) {
-        	  artefactCount++
+        	  artefactCount++;
           }
         }    
         if(artefactCount > 1) {
