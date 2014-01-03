@@ -17,12 +17,16 @@ details :
  - create an application with nodejs 0.6 and mongodb cartridges. 
  - action hooks will setup nodejs 0.10.10 and set node/npm path and proxies
 
-# how to deploy (update your npm proxies)
+# how to deploy (custom config)
+The way to update your npm configuration : set your own proxies
 (assume openshift application name is "ttt")
 <pre>
 git clone https://github.com/boly38/openshift-angularjs-nodejs-mongodb-quickstart.git
 cd openshift-angularjs-nodejs-mongodb-quickstart/
-cat .openshift/lib/.npmrc # update this file with your own config
+
+# update this file with your own config
+cat .openshift/lib/.npmrc
+
 rhc create-app ttt nodejs-0.6 mongodb-2.2 --no-git
 rhc show-app ttt
 git remote add ttt ssh_git_url (the ssh git url given by rhc show-app ttt)
