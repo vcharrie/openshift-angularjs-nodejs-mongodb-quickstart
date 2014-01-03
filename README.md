@@ -39,7 +39,7 @@ git push ttt master --force
 # faq
 
 ## error on deploy (quick) 
-please try (custom config) way : sometimes openshift create-app failed on timeout if nojdes and/or npm dep install is too long.
+please try (custom config) way : sometimes openshift create-app failed on timeout if nodes and/or npm dep install is too long.
 
 ## i am behind a proxy
 
@@ -47,5 +47,5 @@ set "http_proxy" and "https_proxy" before using <code>rhc</code> command, and yo
 <pre>
 Host *.rhcloud.com
 	Port 22 
-	ProxyCommand /c/cygwin/bin/nc.exe -x myproxy:1080 %h %p
+	ProxyCommand /c/cygwin/bin/nc.exe -x mysocksproxy:1080 %h %p
 </pre>
