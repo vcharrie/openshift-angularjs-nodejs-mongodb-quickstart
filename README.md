@@ -9,18 +9,11 @@ openshift-angularjs-nodejs-mongodb-quickstart
 ####################
 # how to deploy me 
 ####################
-# openshift nodejs 0.6 cartridge
-# ------------------------------
-# pre-requisites : check ".openshift/lib/.npmrc" for your proxy configuration
+# pre-requisites : 
+# - check ".openshift/lib/.npmrc" for your proxy configuration (fix for "SSL Error: CERT_UNTRUSTED" error)
 #
-# - clone me locally 
-# - got to the just cloned git directory and do the following commands 
-# (assume openshift application name is "ttt")
+# then the following command will :
+# - create an application with nodejs 0.6 and mongodb cartridges. 
+# - action hooks will setup nodejs 0.10.10 and set node/npm path and proxies
 #
-rhc create-app ttt nodejs-0.6 --no-git
-rhc cartridge add mongodb-2.2 -a ttt
-rhc force-stop-app --app ttt
-cat .openshift/lib/.npmrc | rhc ssh ttt "cat > $OPENSHIFT_HOMEDIR/.npmrc"
-rhc show-app ttt
-git remote add ttt ssh_git_url (the ssh git url given by rhc show-app ttt)
-git push ttt master --force
+rhc create-app mynodejs nodejs-0.6 mongodb-2.2 --from-code=https://github.com/boly38/openshift-angularjs-nodejs-mongodb-quickstart.git
