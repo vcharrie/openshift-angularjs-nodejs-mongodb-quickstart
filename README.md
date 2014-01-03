@@ -32,3 +32,18 @@ rhc show-app ttt
 git remote add ttt ssh_git_url (the ssh git url given by rhc show-app ttt)
 git push ttt master --force
 </pre>
+
+
+# faq
+
+## error on deploy (quick) 
+please try (custom config) way : sometimes openshift create-app failed on timeout if nojdes and/or npm dep install is too long.
+
+## i am behind a proxy
+
+set "http_proxy" and "https_proxy" before using <code>rhc</code> command, and you could update your <code>%HOME%/.ssh/config</code> (example using cygwin nc)
+<pre>
+Host *.rhcloud.com
+	Port 22 
+	ProxyCommand /c/cygwin/bin/nc.exe -x myproxy:1080 %h %p
+</pre>
