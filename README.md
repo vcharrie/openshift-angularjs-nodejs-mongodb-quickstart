@@ -4,6 +4,8 @@ AngularJS, NodeJs, MongoDB sample
 
 - src (Joe Lennon) http://www.ibm.com/developerworks/web/library/wa-nodejs-polling-app/index.html?ca=drs-
 
+- demo http://mynodejs-bvan.rhcloud.com/
+
 pre-requisites :
 - check ".openshift/lib/.npmrc" for your proxy configuration (fix for "SSL Error: CERT_UNTRUSTED" error)
 
