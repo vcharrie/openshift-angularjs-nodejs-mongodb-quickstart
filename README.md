@@ -1,19 +1,30 @@
 openshift-angularjs-nodejs-mongodb-quickstart
 =============================================
-#
-# AngularJS, NodeJs, MongoDB sample
-#
-# src (Joe Lennon) http://www.ibm.com/developerworks/web/library/wa-nodejs-polling-app/index.html?ca=drs-
-#
+AngularJS, NodeJs, MongoDB sample
 
-####################
-# how to deploy me 
-####################
-# pre-requisites : 
-# - check ".openshift/lib/.npmrc" for your proxy configuration (fix for "SSL Error: CERT_UNTRUSTED" error)
-#
-# then the following command will :
-# - create an application with nodejs 0.6 and mongodb cartridges. 
-# - action hooks will setup nodejs 0.10.10 and set node/npm path and proxies
-#
+- src (Joe Lennon) http://www.ibm.com/developerworks/web/library/wa-nodejs-polling-app/index.html?ca=drs-
+
+pre-requisites :
+- check ".openshift/lib/.npmrc" for your proxy configuration (fix for "SSL Error: CERT_UNTRUSTED" error)
+
+# how to deploy (quick) 
+
+<pre>
 rhc create-app mynodejs nodejs-0.6 mongodb-2.2 --from-code=https://github.com/boly38/openshift-angularjs-nodejs-mongodb-quickstart.git
+</pre>
+
+details :
+ - create an application with nodejs 0.6 and mongodb cartridges. 
+ - action hooks will setup nodejs 0.10.10 and set node/npm path and proxies
+
+# how to deploy (update your npm proxies)
+(assume openshift application name is "ttt")
+<pre>
+git clone https://github.com/boly38/openshift-angularjs-nodejs-mongodb-quickstart.git
+cd openshift-angularjs-nodejs-mongodb-quickstart/
+cat .openshift/lib/.npmrc # update this file with your own config
+rhc create-app ttt nodejs-0.6 mongodb-2.2 --no-git
+rhc show-app ttt
+git remote add ttt ssh_git_url (the ssh git url given by rhc show-app ttt)
+git push ttt master --force
+</pre>
