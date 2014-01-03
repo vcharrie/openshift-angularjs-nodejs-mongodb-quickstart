@@ -40,8 +40,9 @@ exports.atlist = function(req, res) {
 // JSON API for creating a new poll
 exports.create = function(req, res) {
   var reqBody = req.body,
-      artefacts = reqBody.artefacts.filter(function(v) { return v.text != ''; }),
-      listObj = {title: reqBody.title, artefacts: artefacts};
+  	  artefacts = reqBody.artefacts.filter(function(v) { return v.text != ''; }),
+  	  selection = reqBody.selection.filter(function(v) { return v.text != ''; }),
+      listObj = {title: reqBody.title, artefacts: artefacts, selection: selection};
   var tlist = new TListDB(listObj);
   tlist.save(function(err, doc) {
     if(err || !doc) {

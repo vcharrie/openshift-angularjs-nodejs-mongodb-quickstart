@@ -4,7 +4,6 @@ function TListListCtrl($scope, TListDB) {
 }
 // Voting / viewing poll results
 function TListItemCtrl($scope, $location, $routeParams, TListDB) {
-  console.log("TListItemCtrl...");
   $scope.tlist = TListDB.get({tlistId: $routeParams.tlistId});
   $scope.addArtefact = function() {
 	    $scope.tlist.artefacts.push({ text: '' });
@@ -22,13 +21,42 @@ function TListItemCtrl($scope, $location, $routeParams, TListDB) {
   			alert('Could not update trip list');
   		}
   	});
+  };
+  
+  $scope.isSelected = function isSelected(artName) {
+	 if ($scope.tlist.selection == undefined) return -1;
+	 for(var i = 0, ln = $scope.tlist.selection.length; i < ln; i++) {
+        var sel = $scope.tlist.selection[i];        
+        if(sel.text == artName) {
+        	return i;
+        }
+     }
+	 return -1;
+  };
+  
+  $scope.toggleSelection = function toggleSelection(artName) {
+	var idx =  $scope.isSelected(artName);
+    // is currently selected
+    if (idx > -1) {
+      console.log("unselect " + artName);
+      $scope.tlist.selection.splice(idx, 1);
+    }
+    // is newly selected
+    else {
+      if ($scope.tlist.selection == undefined) {
+    	  $scope.tlist.selection = [];
+      }
+      console.log("select " + artName);
+      $scope.tlist.selection.push({ text: artName });
+    }
   };  
 }
 // Creating a new poll
 function TListNewCtrl($scope, $location, TListDB) {
   $scope.tlist = {
     title: '',
-    artefacts: [{ text: 'chaussette' }, { text: 'pull' }]
+    artefacts: [{ text: 'chaussette' }, { text: 'pull' }],
+    selection: []
   };
   $scope.addArtefact = function() {
     $scope.tlist.artefacts.push({ text: '' });

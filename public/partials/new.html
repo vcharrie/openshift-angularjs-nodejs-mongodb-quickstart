@@ -11,19 +11,14 @@
             <div ng-repeat="artefact in tlist.artefacts">
               <input type="text" ng-model="artefact.text" class="form-control" placeholder="Enter artefact {{$index+1}} text"><br>
             </div>
+            <button type="button" class="btn btn-default" ng-click="addArtefact()"><span class="glyphicon glyphicon-plus"></span></button>
           </div>    
           <div class="row">
-            <div class="col-xs-12">
-              <button type="button" class="btn btn-default" ng-click="addArtefact()"><span class="glyphicon glyphicon-plus"></span> Add another</button>
+            <div class="col-xs-1">
+              <a href="#/tlists" class="btn btn-default" role="button"><span class="glyphicon glyphicon-arrow-left"></span> Back</a>
             </div>
-          </div>
-          <p><hr></p>
-          <div class="row">
-            <div class="col-xs-2">
-              <a href="#/tlists" class="btn btn-default" role="button"><span class="glyphicon glyphicon-arrow-left"></span> Back to Trip Lists</a>
-            </div>
-            <div class="col-xs-2">
-              <button class="btn btn-primary pull-right" type="submit">Create List</button>
+            <div class="col-xs-1">
+              <button class="btn btn-primary pull-right" type="submit">Create</button>
             </div>
           </div>
           <p>&nbsp;</p>
