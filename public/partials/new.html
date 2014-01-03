@@ -1,0 +1,30 @@
+        <div class="page-header">
+          <h1>Create New Trip List</h1>
+        </div>
+        <form role="form" ng-submit="createTList()">
+          <div class="form-group">
+            <label for="tlistTitle">Title</label>
+            <input type="text" ng-model="tlist.title" class="form-control" id="tlistTitle" placeholder="Enter list title">
+          </div>
+          <div class="form-group">
+            <label>Artefacts</label>
+            <div ng-repeat="artefact in tlist.artefacts">
+              <input type="text" ng-model="artefact.text" class="form-control" placeholder="Enter artefact {{$index+1}} text"><br>
+            </div>
+          </div>    
+          <div class="row">
+            <div class="col-xs-12">
+              <button type="button" class="btn btn-default" ng-click="addArtefact()"><span class="glyphicon glyphicon-plus"></span> Add another</button>
+            </div>
+          </div>
+          <p><hr></p>
+          <div class="row">
+            <div class="col-xs-6">
+              <a href="#/tlists" class="btn btn-default" role="button"><span class="glyphicon glyphicon-arrow-left"></span>Back to Trip Lists</a>
+            </div>
+            <div class="col-xs-6">
+              <button class="btn btn-primary pull-right" type="submit">Create List &raquo;</button>
+            </div>
+          </div>
+          <p>&nbsp;</p>
+        </form>
